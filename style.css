@@ -1,3 +1,11 @@
+:root {
+    --yellow: #F4E225;
+    --lightblue: #B2D7FF; 
+    --darkblue: #044389;
+    --spicyrice: 'Spicy Rice', normal;
+    --inter: 'inter', sans-serif;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +14,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #add8e6; /* Light blue background */
+    background-color: var(--lightblue);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +34,7 @@ body {
     position: absolute;
     top: 10%;
     left: 5%;
-    background-color: yellow;
+    background-color: var(--yellow);
     border-radius: 50%;
     width: 150px;
     height: 150px;
@@ -37,23 +45,19 @@ body {
     font-weight: bold;
 }
 
+h2 { /*Fragentitel*/
+    font-size: 40px;
+    font-family: var(--inter);
+    color: var(--darkblue);
+    font-weight: bold;
+}
+
 .cloud {
-    position: absolute;
-    background-color: white;
-    width: 200px;
-    height: 100px;
-    border-radius: 100px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.cloud-left {
-    top: 30%;
-    left: 10%;
-}
-
-.cloud-right {
-    top: 50%;
-    right: 10%;
+        position: absolute;
+        background-size: contain; /* Passt das Bild in den Bereich an */
+        background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
+        width: 200px; /* Größe der Wolke */
+        height: 100px; /* Größe der Wolke */
 }
 
 .main-text {
@@ -63,9 +67,29 @@ body {
 }
 
 .main-text h1 {
-    font-size: 36px;
-    color: #003366;
-    font-weight: bold;
+    font-size: 64px;
+    color: var(--darkblue);
+    font-family: var(--spicyrice);
 }
 
+.wannwo {
+    position: absolute;
+    align-content: center;
+    display: flex;
+}
 
+.wann {
+    position: right;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.wo {
+    position: left;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
