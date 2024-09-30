@@ -3,7 +3,7 @@
     --lightblue: #B2D7FF; 
     --darkblue: #044389;
     --spicyrice: 'Spicy Rice', normal;
-    --inter: 'inter', sans-serif;
+    --inter: 'inter', sans-serif, normal;
   }
 
 * {
@@ -13,7 +13,6 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
     background-color: var(--lightblue);
     display: flex;
     justify-content: center;
@@ -49,7 +48,6 @@ h2 { /*Fragentitel*/
     font-size: 40px;
     font-family: var(--inter);
     color: var(--darkblue);
-    font-weight: bold;
 }
 
 .cloud {
@@ -70,6 +68,7 @@ h2 { /*Fragentitel*/
     font-size: 64px;
     color: var(--darkblue);
     font-family: var(--spicyrice);
+    height: max-content;
 }
 
 .wannwo {
@@ -84,6 +83,8 @@ h2 { /*Fragentitel*/
     justify-content: center;
     align-items: center;
     width: 50%;
+    padding: 5%;
+    text-align: center;
 }
 
 .wo {
@@ -92,4 +93,21 @@ h2 { /*Fragentitel*/
     justify-content: center;
     align-items: center;
     width: 50%;
+    padding: 5%;
+    text-align: center;
 }
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 200px;
+    margin: 10px;
+    background-color: var(--darkblue);
+    color: var(--yellow);
+  }
+
+  input[type="date"] :hover {
+    background-color: var(--yellow);
+    color: var(--darkblue);
+  }
