@@ -71,43 +71,58 @@ h2 { /*Fragentitel*/
     height: max-content;
 }
 
-.wannwo {
+.wannwielang {
     position: absolute;
     align-content: center;
     display: flex;
+    top: 100%;
 }
 
 .wann {
-    position: right;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     width: 50%;
     padding: 5%;
     text-align: center;
 }
 
-.wo {
-    position: left;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.wielang {
     width: 50%;
     padding: 5%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input[type="date"] {
     padding: 10px;
     font-size: 16px;
     border-radius: 4px;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: var(--darkblue);
+    color: var(--yellow);
+    font-size: 18px;
+    font-family: var(--inter);
+  }
+
+  input[type="date"] :hover {
+    background-color: var(--yellow);
+    color: var(--darkblue);
+  }
+
+  form {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
     width: 200px;
     margin: 10px;
+    height: 40px;
     background-color: var(--darkblue);
     color: var(--yellow);
   }
 
-  input[type="date"] :hover {
+  form:hover {
     background-color: var(--yellow);
     color: var(--darkblue);
   }
