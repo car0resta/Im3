@@ -185,6 +185,7 @@ input[type="date"] {
     border-radius: 4px;
     color: #000;
     text-align: center;
+    flexdisplay: ;
 
 }
 
@@ -193,8 +194,13 @@ input[type="date"] {
 
 }
 
-.h3{ /*Fragentitel*/
+:roots{
+    --arial: 'Arial', sans-serif;
+    --darkblue: #00008B;
+}
+
+.h3 { /*Fragentitel*/
     font-size: 20px;
-    font-family: var(--inter);
+    font-family: var(--arial);
     color: var(--darkblue);
 }
