@@ -192,3 +192,9 @@ input[type="date"] {
     margin-top: 10px;
 
 }
+
+.h3{ /*Fragentitel*/
+    font-size: 20px;
+    font-family: var(--inter);
+    color: var(--darkblue);
+}

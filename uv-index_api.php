@@ -14,16 +14,13 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // Verwende den dynamischen Ort in der SQL-Abfrage
-    $sql = "SELECT * FROM `uv_index` WHERE ort = :ort AND erstellt BETWEEN '2024-10-10 08:00:00' AND '2024-10-10 20:00:00'";
+    $sql = "SELECT * FROM `uv_index` WHERE ort = ? AND erstellt BETWEEN '2024-10-10 08:00:00' AND '2024-10-10 20:00:00'";
     
     // Bereite die Abfrage vor
     $stmt = $pdo->prepare($sql);
     
-    // Binde den Ort-Parameter an die Abfrage
-    $stmt->bindParam(':ort', $ort, PDO::PARAM_STR);
-    
-    // Führe die Abfrage aus
-    $stmt->execute();
+    // Führe die Abfrage aus und übergebe den Ort
+    $stmt->execute([$ort]);
     
     // Hole die Ergebnisse
     $uvAbfrage = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,6 +31,7 @@ try {
 } catch (PDOException $e) {
     echo json_encode(array('error' => $e->getMessage()));
 }
+
 
 
 /*

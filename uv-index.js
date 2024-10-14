@@ -84,88 +84,64 @@
 
 console.log("uv-index.js");
 
-const apiUrl = "https://im3.lisastrebel.ch/uv-index_api.php";
-let chart = null;
-let ort = "";
-let uvIndex = null;
-let erstellt = "";
-
-getApiData(apiUrl);
-
-const ctx = document.getElementById("myChart");
-
-chart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: uvIndex,
-    datasets: [
-      {
-        label: ort,
-        data: anzahl,
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
+document.getElementById('myort').addEventListener('submit', function(event) {
+    event.preventDefault(); // Verhindert das Neuladen der Seite
+    
+    const selectedLocation = document.getElementById('selectort').value;
+    
+    // Baue die URL mit dem ausgewählten Ort zusammen
+    const url = `https://im3.lisastrebel.ch/uv-index_api.php?ort=${selectedLocation}`;
+    
+    // Rufe die Daten ab und aktualisiere den Chart
+    getApiData(url);
 });
 
+// Funktion, um die Daten von der API abzurufen und den Chart zu aktualisieren
 function getApiData(url) {
-  console.log(url);
-  fetch(url)
-    .then((response) => response.json())
-    .then((myData) => {
-      console.log(myData);
+    fetch(url)
+        .then((response) => response.json())
+        .then((myData) => {
+            console.log(myData);
 
-      // vornamen = myData.map((item) => item.vorname);
-      chart.data.labels = myData.map((item) => item.ort);
-      // anzahl = myData.map((item) => item.anzahl);
-      chart.data.datasets[0].data = myData.map((item) => item.uvIndex);
-      // jahr = myData[0].jahr;
-      chart.data.datasets[0].label = myData[0].erstellt;
-
-      chart.update();
-    });
+            // Stelle sicher, dass der Chart mit den neuen Daten aktualisiert wird
+            if (myData.length > 0) {
+                const uvIndex = myData.map((item) => item.uvIndex); // Die UV-Index-Werte
+                const erstellt = myData.map((item) => item.erstellt); // Die Erstellungsdaten
+                
+                // Update den Chart
+                chart.data.labels = erstellt; // Die X-Achsen-Beschriftungen
+                chart.data.datasets[0].data = uvIndex; // Die Y-Achsen-Daten
+                chart.data.datasets[0].label = myData[0].ort; // Das Label des Ortes
+                
+                chart.update(); // Aktualisiere den Chart
+            } else {
+                console.error("Keine Daten für den ausgewählten Ort gefunden.");
+            }
+        })
+        .catch((error) => {
+            console.error("Fehler beim Abrufen der Daten: ", error);
+        });
 }
 
-function addData(chart, label, newData) {
-  chart.data.labels.push(label);
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data.push(newData);
-  });
-  chart.update();
-}
-
-let form = document.getElementById("myort");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  let ort = document.getElementById("ort").value;
-  /* let anzahl = document.getElementById("anzahl").value; */
-
-  /* let url = `https://im3.im-abc.ch/vorname_api.php?jahr=${jahr}&geschlecht=${geschlecht}&anzahl=${anzahl}`; */
-  let url = `https://im3.lisastrebel.ch/uv-index_api.php?ort=${ort}`;
-
-  getApiData(url);
+// Chart-Initialisierung
+const ctx = document.getElementById("myChart").getContext("2d");
+let chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: [], // Leere Labels, bis die Daten kommen
+        datasets: [
+            {
+                label: "UV-Index",
+                data: [], // Leere Daten, bis die Daten kommen
+                borderWidth: 1,
+            },
+        ],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    },
 });
-
-// Abrufen der Jahre und in Select einbauen
-
-const apiUrlJahre = "https://im3.lisastrebel.ch/uv-index_api.php?ort";
-
-fetch(apiUrlJahre)
-  .then((response) => response.json())
-  .then((jahrData) => {
-    console.log(erstelltData);
-    let jahrSelect = document.getElementById("erstellt");
-    erstelltData.forEach((item) => {
-      let option = document.createElement("option");
-      option.text = item.erstellt;
-      option.value = item.erstellt;
-      jahrSelect.add(option);
-    });
-  });
