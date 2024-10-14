@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UV-Index</title>
+    <link rel="stylesheet" href="uv-index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
+
+</head>
+<h1>UV-Index</h1>
+<form id="myort">
+    <label for="ort"></label>
+        <select id="selectort">
+            <option value="Berner Oberland">Berner Oberland</option>
+            <option value="Bündner Berge">Bündner Berge</option>
+            <option value="Innerschwyz">Innerschwyz</option>
+            <option value="Wallis">Wallis</option>
+        </select>
+        <button type="submit">Anzeigen
+        </button>
+        <div>
+            <canvas id="myChart"></canvas>
+          </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="uv-index.js"></script>
+</html>

@@ -20,7 +20,6 @@ function setMaxDateForDatePicker() {
         return false; // Formular wird nicht abgesendet
     }
   }
-    return true; // Formular wird abgesendet
 
 
     function selectField(element) {
