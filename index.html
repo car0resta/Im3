@@ -60,11 +60,23 @@
                 <option value="24">24</option>
             </select>
         </form>
-        
     </div>
-    <div class="wo">
-        <h2>Wo bisch gsii?</h2>
+</div>
+<div class="wo">
+    <h2>Wo bisch gsii?</h2>
+    <div class="grid-container">
+        <div class="grid-item" onclick="selectField(this)">Antwort 1</div>
+        <div class="grid-item" onclick="selectField(this)">Antwort 2</div>
+        <div class="grid-item" onclick="selectField(this)">Antwort 3</div>
+        <div class="grid-item" onclick="selectField(this)">Antwort 4</div>
     </div>
+</div>
+<div class="Huuttyp">
+    <h2>Was isch din Huuttyp?</h2>
+    <input type="date" id="date-picker">
 </div>
 </body>
 </html>
+
+
+SELECT AVG(uv_index) FROM `uv_index` WHERE ort = "Wallis" AND erstellt BETWEEN '2024-10-10 08:00:00' AND '2024-10-10 20:00:00'

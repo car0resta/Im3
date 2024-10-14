@@ -21,3 +21,13 @@ function setMaxDateForDatePicker() {
     }
   }
     return true; // Formular wird abgesendet
+
+
+    function selectField(element) {
+      // Entferne die 'selected' Klasse von allen Feldern
+      const fields = document.querySelectorAll('.grid-item');
+      fields.forEach(field => field.classList.remove('selected'));
+  
+      // Füge die 'selected' Klasse zu dem angeklickten Feld hinzu
+      element.classList.add('selected');
+  }

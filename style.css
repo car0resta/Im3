@@ -126,3 +126,32 @@ input[type="date"] {
     background-color: var(--yellow);
     color: var(--darkblue);
   }
+
+  .wo {
+    position: absolute;
+    align-content: center;
+    display: flex;
+    top: 140%;
+    margin: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 300px;
+    margin: 50px auto;
+}
+
+.grid-item {
+    background-color: var(--darkblue);
+    font: var(--yellow);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.grid-item.selected {
+    background-color: var(--yellow);
+    font:var(--darkblue);
+}
