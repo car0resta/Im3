@@ -229,18 +229,22 @@ input[type="date"] {
     align-items: center;
     margin-bottom: 20px;
     position: absolute;
-    top: 205%;
+    top: 210%;
     flex-direction: column;
 }
 
 .uvSchutzbox-container {
-    display: flex;
+    display:flex;
     justify-content: space-between;
     width: 100%;
     max-width:600px;
     margin: 10px;
+<<<<<<< HEAD
      position: relative;
     top: 180%;
+=======
+    position: relative;
+>>>>>>> dece1be1560c560b5bad9a83f5c786be79e12b0d
 }
 
 
@@ -275,4 +279,12 @@ input[type="date"] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.ergebnisContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
