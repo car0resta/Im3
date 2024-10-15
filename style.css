@@ -206,7 +206,7 @@ align-items: center;
 
 /* Rahmen für den ausgewählten Button */
 .box1.selected {
-    border: 3px solid #F4E225; /* Schwarzer Rahmen */
+    border: 5px solid #000; /* Schwarzer Rahmen */
 }
 
 
