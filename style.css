@@ -239,12 +239,7 @@ input[type="date"] {
     width: 100%;
     max-width:600px;
     margin: 10px;
-<<<<<<< HEAD
-     position: relative;
-    top: 180%;
-=======
     position: relative;
->>>>>>> dece1be1560c560b5bad9a83f5c786be79e12b0d
 }
 
 
@@ -282,11 +277,12 @@ input[type="date"] {
 }
 
 .ergebnisContainer {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    
 }
 
 .ergebnisse {
