@@ -286,5 +286,21 @@ input[type="date"] {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
+}
+
+.ergebnisse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.grafik {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    margin: 10px;
 }
