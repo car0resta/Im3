@@ -35,4 +35,3 @@ echo $transformierteDatenJson;
 return $transformierteDatenJson;
 
 
-?>

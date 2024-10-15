@@ -62,20 +62,38 @@ function validateSelection() {
 
 console.log("home.js");
 
-
-
 document.getElementById('myort').addEventListener('submit', function(event) {
     event.preventDefault(); // Verhindert das Neuladen der Seite
-    
-    const selectedLocation = document.getElementById('selectort').value;
+
+    // ort
+    const gridItems = document.querySelectorAll('.grid-item.selected');
+    let selectedLocation = '';
+    if (gridItems.length > 0) {
+        selectedLocation = gridItems[0].outerText;
+    }
+
+    // Datum
     const selectedDate = document.getElementById('date-picker').value;
     
     // Baue die URL mit dem ausgewählten Ort zusammen
-    const url = `https://im3.lisastrebel.ch/unload.php?ort=${selectedLocation}&datum=${selectedDate}`;
+    const url = "https://im3.lisastrebel.ch/unload.php?ort="+encodeURIComponent(selectedLocation)+"&erstellt="+encodeURIComponent(selectedDate);
+    console.log(url);
     
     // Rufe die Daten ab und aktualisiere den Chart
     getApiData(url);
 });
+
+const gridItems = document.querySelectorAll('.grid-item'); // Get all elements with class "grid-item"
+let selectedValue = '';
+
+gridItems.forEach(item => {
+    if (item.classList.contains('selected')) { // Check if the element has class "selected"
+        selectedValue = item.value; // Get the value of the selected element
+    }
+});
+
+console.log(selectedValue);
+
 
 // Funktion, um die Daten von der API abzurufen und den Chart zu aktualisieren
 function getApiData(url) {
@@ -103,10 +121,7 @@ function getApiData(url) {
     })
     .catch((error) => {
         console.error("Fehler beim Abrufen der Daten: ", error);
-            console.log(myData);
     });
-
-
 
 }
 

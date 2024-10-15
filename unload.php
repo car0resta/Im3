@@ -19,18 +19,21 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // Verwende den dynamischen Ort in der SQL-Abfrage
-    $sql = "SELECT * FROM `uv_index` WHERE ort = ? AND erstellt = ?";
+    $sql = "SELECT * FROM `uv_index` WHERE ort = :ort AND erstellt BETWEEN :startdate AND :enddate";
     
-    // Bereite die Abfrage vor
+$startDatum = $datum." 08:%";
+$endDatum = $datum." 21:%";
+
+
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':ort', $ort);
+    $stmt->bindParam(':startdate', $startDatum);
+    $stmt->bindParam(':enddate', $endDatum);
     
-    // Führe die Abfrage aus und übergebe den Ort
-    $stmt->execute([$ort, $datum]);
+    $stmt->execute();
     
-    // Hole die Ergebnisse
     $uvAbfrage = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Ausgabe als JSON
     echo json_encode($uvAbfrage);
 
 } catch (PDOException $e) {
