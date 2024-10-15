@@ -39,3 +39,4 @@ $endDatum = $datum." 21:%";
 } catch (PDOException $e) {
     echo json_encode(array('error' => $e->getMessage()));
 }
+
