@@ -10,8 +10,12 @@ function setMaxDateForDatePicker() {
   document.addEventListener('DOMContentLoaded', setMaxDateForDatePicker);
 
 
+  let testdiv = document.querySelector('#test');
+    console.log(testdiv);   
 // Event-Listener für das Dropdown-Feld hinzufügen
-document.getElementById('numberSelect').addEventListener('change', validateSelection);
+let numberSelect = document.querySelector('#numberSelect');
+console.log(numberSelect);
+numberSelect.addEventListener('change', validateSelection);
 
 function validateSelection() {
     const selectElement = document.getElementById('numberSelect');
@@ -19,7 +23,8 @@ function validateSelection() {
 
     if (selectedValue >= 1 && selectedValue <= 24) {
         // Gültige Zahl: Hintergrundfarbe auf Grün setzen
-        selectElement.style.backgroundColor = 'lightgreen';
+        selectElement.style.backgroundColor = '#F4E225';
+        selectElement.style.color = '#044389';
     } else {
         // Ungültige Auswahl: Hintergrundfarbe auf Rot setzen (falls notwendig)
         selectElement.style.backgroundColor = 'lightcoral';
@@ -129,11 +134,3 @@ let chart = new Chart(ctx, {
     }
 });
 
-// Funktion für Buttons von Hauttyp Selektion
-function selectSkinType(button) {
-    // Remove 'selected' class from all buttons
-    document.querySelectorAll('.box1').forEach(btn => btn.classList.remove('selected'));
-    
-    // Add 'selected' class to the clicked button
-    button.classList.add('selected');
-}
