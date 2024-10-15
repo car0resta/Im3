@@ -129,3 +129,11 @@ let chart = new Chart(ctx, {
     }
 });
 
+// Funktion für Buttons von Hauttyp Selektion
+function selectSkinType(button) {
+    // Remove 'selected' class from all buttons
+    document.querySelectorAll('.box1').forEach(btn => btn.classList.remove('selected'));
+    
+    // Add 'selected' class to the clicked button
+    button.classList.add('selected');
+}
