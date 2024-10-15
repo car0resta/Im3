@@ -62,13 +62,16 @@ function validateSelection() {
 
 console.log("home.js");
 
+
+
 document.getElementById('myort').addEventListener('submit', function(event) {
     event.preventDefault(); // Verhindert das Neuladen der Seite
     
     const selectedLocation = document.getElementById('selectort').value;
+    const selectedDate = document.getElementById('date-picker').value;
     
     // Baue die URL mit dem ausgewählten Ort zusammen
-    const url = `https://im3.lisastrebel.ch/unload.php?ort=${selectedLocation}`;
+    const url = `https://im3.lisastrebel.ch/unload.php?ort=${selectedLocation}&datum=${selectedDate}`;
     
     // Rufe die Daten ab und aktualisiere den Chart
     getApiData(url);
