@@ -168,3 +168,5 @@ function selectUvSchutz(button) {
     // Add 'selected' class to the clicked UV protection button
     button.classList.add('selected');
 }
+
+

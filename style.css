@@ -4,6 +4,7 @@
     --darkblue: #044389;
     --spicyrice: 'Spicy Rice', normal;
     --inter: 'inter', sans-serif, normal;
+    --arial: 'Arial', sans-serif;
   }
 
 * {
@@ -208,14 +209,9 @@ input[type="date"] {
 
 /* Rahmen für den ausgewählten Button */
 .box1:focus {
-    border: 3px solid #044389; /* Schwarzer Rahmen */
+    border: 3px solid var(--darkblue); /* Schwarzer Rahmen */
 }
 
-
-:root{
-    --arial: 'Arial', sans-serif;
-    --darkblue: #00008B;
-}
 
 .h3 { /*Fragentitel*/
     font-size: 20px;
@@ -247,7 +243,7 @@ input[type="date"] {
 .uvSchutzbox {
     width: 42px; /* Adjusted size for better visibility */
     height: 42px; /* Adjusted size for better visibility */
-    background-color: rgba(4, 67, 137, 1); /* Blue color */
+    background-color: var(--darkblue); /* Blue color */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -288,9 +284,76 @@ input[type="date"] {
 }
 
 .ergebnisContainer {
-    position: absolute;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+}
+
+.ergebnisse {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 10px;
+}
+
+.ergebnisBoxen {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.ergebnisBox1 , .ergebnisBox2 {
+    height: 200px;
+    width: 200px;
+    background-color: var(--darkblue);
+    font-size: 18px;
+    color: var(--yellow);
+    border-radius: 4px;
+    margin: 10px;
+    padding: 20px;
+}
+
+.grafik {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#myChart {
+    height: 200px;
+    margin: 10px;
+}
+
+p {
+    font-size: 18px;
+    font-family: var(--inter);
+}
+
+.submit {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: var(--darkblue);
+    color: var(--yellow);
+    font-size: 18px;
+    font-family: var(--inter);
+}
+
+.anzeigen {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
