@@ -208,7 +208,7 @@ input[type="date"] {
 
 /* Rahmen für den ausgewählten Button */
 .box1:focus {
-    border: 3px solid #000; /* Schwarzer Rahmen */
+    border: 3px solid #044389; /* Schwarzer Rahmen */
 }
 
 
@@ -222,6 +222,15 @@ input[type="date"] {
     font-family: var(--arial);
     color: var(--darkblue);
 }
+
+.UV-Schutz{
+    position: absolute;
+    top: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .kurvenGrafik {
     position: absolute;
