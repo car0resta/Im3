@@ -137,3 +137,19 @@ let chart = new Chart(ctx, {
     }
 });
 
+//Wie guet hesch dich ihgrämt Uswahl
+function selectSkinType(button) {
+    // Remove 'selected' class from all skin type buttons
+    document.querySelectorAll('.box1').forEach(btn => btn.classList.remove('selected'));
+    
+    // Add 'selected' class to the clicked skin type button
+    button.classList.add('selected');
+}
+
+function selectUvSchutz(button) {
+    // Remove 'selected' class from all UV protection buttons
+    document.querySelectorAll('.uvSchutzbox').forEach(btn => btn.classList.remove('selected'));
+    
+    // Add 'selected' class to the clicked UV protection button
+    button.classList.add('selected');
+}

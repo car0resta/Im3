@@ -223,14 +223,46 @@ input[type="date"] {
     color: var(--darkblue);
 }
 
-.UV-Schutz{
-    position: absolute;
-    top: 200%;
+.uvSchutz{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
+.uvSchutzbox-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width:600px;
+    margin: 0 auto;
+    position: relative;
+    top: 180%;
+}
+
+
+.uvSchutzbox {
+    width: 42px; /* Adjusted size for better visibility */
+    height: 42px; /* Adjusted size for better visibility */
+    background-color: rgba(4, 67, 137, 1); /* Blue color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+
+.uvSchutzbox:hover {
+    opacity: 0.5;
+}
+
+.uvSchutzbox.selected{
+    background-color: #F4E225;
+}
 
 .kurvenGrafik {
     position: absolute;
