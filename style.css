@@ -256,20 +256,13 @@ input[type="date"] {
     background-color: #F4E225;
 }
 
-.text-next-to-box {
-    font-size: 16px;
-    font-family: var(--arial);
-    color: var(--darkblue);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
 
-.text { /*Fragentitel*/
+
+.h3 { /*Fragentitel*/
     font-size: 20px;
     font-family: var(--arial);
     color: var(--darkblue);
+    margin-bottom: 10px;
 }
 .kurvenGrafik {
     position: absolute;
