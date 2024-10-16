@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonnenschutz Berechnung</title>
+    <style>
+        /* Einfache Formatierung */
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sonnenschutz Zeitrechner</h1>
+    <form id="schutzForm">
+        <label for="hauttyp">Hauttyp:</label>
+        <select id="hauttyp" name="hauttyp">
+            <option value="1">Hauttyp 1</option>
+            <option value="2">Hauttyp 2</option>
+            <option value="3">Hauttyp 3</option>
+            <option value="4">Hauttyp 4</option>
+        </select>
+
+        <label for="lsf">Lichtschutzfaktor (LSF):</label>
+        <input type="number" id="lsf" name="lsf" min="0" value="0">
+
+        <button type="submit">Berechnen</button>
+    </form>
+
+    <div id="result">
+        <!-- Hier wird das Ergebnis angezeigt -->
+    </div>
+
+    <script src="test.js"></script>
+</body>
+</html>

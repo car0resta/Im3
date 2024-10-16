@@ -152,13 +152,20 @@ let chart = new Chart(ctx, {
     }
 });
 
-//Wie guet hesch dich ihgrämt Uswahl
+let selectedHauttyp = null; // Globale Variable zur Speicherung des Hauttyps
+
 function selectSkinType(button) {
-    // Remove 'selected' class from all skin type buttons
+    // Entfernt die 'selected'-Klasse von allen Hauttyp-Buttons
     document.querySelectorAll('.box1').forEach(btn => btn.classList.remove('selected'));
-    
-    // Add 'selected' class to the clicked skin type button
+
+    // Fügt die 'selected'-Klasse zum geklickten Button hinzu
     button.classList.add('selected');
+
+    // Speichert den ausgewählten Hauttyp (extrahiert die Zahl aus dem Text des Buttons)
+    const skinTypeText = button.querySelector('span').textContent.trim();
+    selectedHauttyp = skinTypeText.match(/\d+/)[0]; // Extrahiert die Nummer vom Hauttyp (z.B. '1' für Hauttyp 1)
+    
+    console.log("Ausgewählter Hauttyp:", selectedHauttyp); // Zu Debugging-Zwecken
 }
 
 function selectUvSchutz(button) {
@@ -168,5 +175,42 @@ function selectUvSchutz(button) {
     // Add 'selected' class to the clicked UV protection button
     button.classList.add('selected');
 }
+
+document.getElementById('schutzForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Verhindert, dass das Formular die Seite neu lädt
+
+    // Holt den LSF-Wert aus dem Formular
+    const lsf = document.getElementById('lsf').value;
+
+    // Prüft, ob ein Hauttyp ausgewählt wurde
+    if (!selectedHauttyp) {
+        alert("Bitte wähle einen Hauttyp aus.");
+        return;
+    }
+
+    // Sendet eine GET-Anfrage mit dem ausgewählten Hauttyp und LSF
+    fetch(`unload2.php?hauttyp=${selectedHauttyp}&lsf=${lsf}`)
+        .then(response => response.json())
+        .then(data => {
+            // Verarbeitung der Antwort
+            if (data.error) {
+                document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${data.error}</p>`;
+            } else {
+                if (data.length > 0) {
+                    let resultHtml = "<ul>";
+                    data.forEach(item => {
+                        resultHtml += `<li>Sonnenschutzzeit: ${item.geschuetzt} Minuten</li>`;
+                    });
+                    resultHtml += "</ul>";
+                    document.getElementById('result').innerHTML = resultHtml;
+                } else {
+                    document.getElementById('result').innerHTML = "<p>Keine Ergebnisse gefunden.</p>";
+                }
+            }
+        })
+        .catch(error => {
+            document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${error.message}</p>`;
+        });
+});
 
 

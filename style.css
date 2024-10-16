@@ -214,9 +214,18 @@ input[type="date"] {
 
 .text-next-to-box {
     font-family: Arial, sans-serif;
-    color: rgba(244, 226, 37, 1);
-    margin-left: 120px;
+    color: var(--darkblue);
+    margin-left: 20px;
 }
+
+.garnoed .text-next-to-box {
+    width: 100px;
+}
+
+.schutz30 .text-next-to-box, .schutz50 .text-next-to-box {
+    width: 160px;
+}
+
 .uvSchutz{
     display: flex;
     justify-content: center;
@@ -237,6 +246,14 @@ input[type="date"] {
     top: 180%;
 }
 
+.garnoed, .schutz30, .schutz50 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    position: relative;
+    top: 200%;
+}
 
 .uvSchutzbox {
     width: 42px; /* Adjusted size for better visibility */
@@ -247,7 +264,7 @@ input[type="date"] {
     align-items: center;
     margin: 5px;
     border: 1px solid;
-    cursor: pointer;
+    cursor: pointer; /* Cursor als Pointer */
     transition: background-color 0.3s ease;
     margin-bottom: 10px;
 }
@@ -258,7 +275,7 @@ input[type="date"] {
 }
 
 .uvSchutzbox.selected{
-    background-color: #F4E225;
+    background-color: var(--yellow);
 }
 
 
