@@ -212,6 +212,11 @@ input[type="date"] {
     border: 3px solid var(--darkblue); /* Schwarzer Rahmen */
 }
 
+.text-next-to-box {
+    font-family: Arial, sans-serif;
+    color: rgba(244, 226, 37, 1);
+    margin-left: 120px;
+}
 .uvSchutz{
     display: flex;
     justify-content: center;
@@ -257,13 +262,6 @@ input[type="date"] {
 }
 
 
-
-.h3 { /*Fragentitel*/
-    font-size: 20px;
-    font-family: var(--arial);
-    color: var(--darkblue);
-    margin-bottom: 10px;
-}
 .kurvenGrafik {
     position: absolute;
     top: 200%;
