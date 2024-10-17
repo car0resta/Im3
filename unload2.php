@@ -15,7 +15,7 @@ if (isset($_GET['lsf'])) {
 if (isset($_GET['uvindex'])) {
     $uvindex = $_GET['uvindex']; // LSF kommt aus dem Formular (über GET)
 } else {
-    $uvindex = 1; // Standardwert, wenn kein LSF ausgewählt wurde
+    $uvindex = 5; // Standardwert, wenn kein LSF ausgewählt wurde
 }
 
 require_once 'config.php';

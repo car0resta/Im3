@@ -61,7 +61,7 @@ document.getElementById('numberSelect').addEventListener('change', function() {
 
 console.log("home.js");
 
-document.getElementById('myort').addEventListener('submit', function(event) {
+document.getElementById('myort').addEventListener('submit', async function(event) {
     event.preventDefault(); // Verhindert das Neuladen der Seite
 
     // ort
@@ -89,9 +89,8 @@ document.getElementById('myort').addEventListener('submit', function(event) {
     
     // Rufe die Daten ab und aktualisiere den Chart
     let averageUvIndex = 0;
-    averageUvIndex = getApiData(url);
+    averageUvIndex = await getApiData(url);
 
-    console.log(averageUvIndex);
     berechneSchutzzeit(averageUvIndex); // Führt die Schutzzeit-Berechnung aus
 });
 
@@ -108,10 +107,10 @@ console.log(selectedValue);
 
 
 // Funktion, um die Daten von der API abzurufen und den Chart zu aktualisieren
-function getApiData(url) {
+async function getApiData(url) {
 
-    let averageUvIndexDisplay = 0;
-    fetch(url)
+    let averageUvIndex = 0;
+    return fetch(url)
     .then((response) => response.json())
     .then((myData) => {
         console.log("API Response:", myData); // Überprüfe die Struktur der zurückgegebenen Daten
@@ -134,16 +133,14 @@ function getApiData(url) {
         chart.update();
 
         // Zeige den durchschnittlichen UV-Index an
-        const averageUvIndex = myData.average_uv_index;
+        averageUvIndex = myData.average_uv_index;
         console.log(averageUvIndex);
         let averageUvIndexDisplay = averageUvIndex !== null ? averageUvIndex.toFixed(2) : "Nicht verfügbar";
         console.log(averageUvIndexDisplay);
 
         // return averageUvIndexDisplay;
 
-        
-        document.getElementById('averageUvIndex').innerHTML = `Durchschnittlicher UV-Index: ${averageUvIndexDisplay}`;
-
+        return averageUvIndex;
         // Hier kannst du die Schutzzeit berechnen, indem du die Werte von der Schutzzeit-PHP-Datei abfragst
         // Führe den Fetch für die Schutzzeit durch
         // fetch(`schutzzeit.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}&uvIndex=${myData.uv_data[0].ort}`)
@@ -157,8 +154,6 @@ function getApiData(url) {
     .catch((error) => {
         console.error("Fehler beim Abrufen der Daten: ", error);
     });
-
-    return averageUvIndexDisplay;
 
 
 }
@@ -246,7 +241,7 @@ function berechneSchutzzeit(averageUvIndex) {
     console.log("averageUvIndex in berechneSchutzzeit:", averageUvIndex);
 
     // Sendet eine GET-Anfrage mit dem ausgewählten Hauttyp und UV-Schutz
-    fetch(`https://im3.lisastrebel.ch/unload2.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}`)
+    fetch(`https://im3.lisastrebel.ch/unload2.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}&uvindex=${averageUvIndex}`)
     .then(response => response.json())
     .then(data => {
         console.log("Server Response:", data); // Fügt dies hinzu, um die Antwort zu überprüfen
@@ -276,9 +271,9 @@ function berechneSchutzzeit(averageUvIndex) {
 
             console.log("wirklich:", wirklich); 
             if (data[0].geschuetzt > wirklich) {
-                document.getElementById('resultattext').innerText = `GUT GESCHÜTZT!`;
+                document.getElementById('resultattext').innerText = `Wow, dass hesch du super gmacht!`;
             } else {    
-                document.getElementById('resultattext').innerText = `Nicht gut geschützt!`;
+                document.getElementById('resultattext').innerText = `Ouh...nöchstmal besser meh Sunnecreme bruche :/`;
             }
 
         }
