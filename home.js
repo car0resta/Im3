@@ -1,55 +1,37 @@
+document.addEventListener('DOMContentLoaded', function() {
+
+    document.getElementById('date-picker').addEventListener('change', function() {
+        this.classList.add('datepicker');
+        if (this.value) {
+            this.classList.add('datepicker-selected');
+            this.classList.remove('datepicker');
+        } else {
+            this.classList.remove('datepicker-selected');
+            this.classList.add('datepicker');
+        }
+    });
+
+});
+
+
+
 // Datum auswählen
 //Funktion, um das heutige Datum im Format 'YYYY-MM-DD' zu ermitteln
 function setMaxDateForDatePicker() {
     const today = new Date().toISOString().split('T')[0]; // Erhalte das heutige Datum
     const dateInput = document.getElementById('date-picker'); // Wähle das Datumseingabefeld aus
     dateInput.setAttribute('max', today); // Setze das 'max'-Attribut auf das heutige Datum
+
   }
   
   // Wenn das DOM geladen ist, führe die Funktion aus
   document.addEventListener('DOMContentLoaded', setMaxDateForDatePicker);
 
-
-  let testdiv = document.querySelector('#test');
-    console.log(testdiv);   
 // Event-Listener für das Dropdown-Feld hinzufügen
-let numberSelect = document.querySelector('#numberSelect');
-console.log(numberSelect);
-numberSelect.addEventListener('change', validateSelection);
-
-function validateSelection() {
-    const selectElement = document.getElementById('numberSelect');
-    const selectedValue = selectElement.value;
-
-    if (selectedValue >= 1 && selectedValue <= 24) {
-        // Gültige Zahl: Hintergrundfarbe auf Grün setzen
-        selectElement.style.backgroundColor = '#F4E225';
-        selectElement.style.color = '#044389';
-    } else {
-        // Ungültige Auswahl: Hintergrundfarbe auf Rot setzen (falls notwendig)
-        selectElement.style.backgroundColor = 'lightcoral';
-    }
-}
-
-
-
-// // Anzahl Stunden auswählen
-//   function validateInput() {
-//     const input = document.getElementById('numberInput').value;
-//     const number = parseInt(input, 10);
-
-//     if (isNaN(number) || number < 1 || number > 24) {
-//         inputElement.style.backgroundColor = 'lightcoral';
-//         alert("Bitte geben Sie eine gültige Zahl zwischen 1 und 24 ein.");
-//         return false; // Formular wird nicht abgesendet
-//     }
-//     else {
-//       // Gültige Zahl: Setze die Hintergrundfarbe auf Grün
-//       inputElement.style.backgroundColor = 'lightgreen';
-//       return true; // Formular kann abgesendet werden
-//   }}
-
-
+document.getElementById('numberSelect').addEventListener('change', function() {
+    const selectedValue = this.value; // Hole den ausgewählten Wert
+    document.getElementById('selectedHours').innerText = `${selectedValue} Stund`; // Zeige die Auswahl an
+});
 
     function selectField(element) {
       // Entferne die 'selected' Klasse von allen Feldern
@@ -70,17 +52,30 @@ document.getElementById('myort').addEventListener('submit', function(event) {
     let selectedLocation = '';
     if (gridItems.length > 0) {
         selectedLocation = gridItems[0].outerText;
+    } else {
+        alert("Bitte wähle einen Ort aus.");
+        return;
     }
 
     // Datum
     const selectedDate = document.getElementById('date-picker').value;
+    if (!selectedDate) {
+        alert("Bitte wähle ein Datum aus.");
+        return;
+    }
+
+    
     
     // Baue die URL mit dem ausgewählten Ort zusammen
     const url = "https://im3.lisastrebel.ch/unload.php?ort="+encodeURIComponent(selectedLocation)+"&erstellt="+encodeURIComponent(selectedDate);
     console.log(url);
     
     // Rufe die Daten ab und aktualisiere den Chart
-    getApiData(url);
+    let averageUvIndex = 0;
+    averageUvIndex = getApiData(url);
+
+    console.log(averageUvIndex);
+    berechneSchutzzeit(averageUvIndex); // Führt die Schutzzeit-Berechnung aus
 });
 
 const gridItems = document.querySelectorAll('.grid-item'); // Get all elements with class "grid-item"
@@ -97,31 +92,57 @@ console.log(selectedValue);
 
 // Funktion, um die Daten von der API abzurufen und den Chart zu aktualisieren
 function getApiData(url) {
+
+    let averageUvIndexDisplay = 0;
     fetch(url)
     .then((response) => response.json())
     .then((myData) => {
         console.log("API Response:", myData); // Überprüfe die Struktur der zurückgegebenen Daten
 
-        // Wenn die Daten leer sind, logge eine Fehlermeldung
-        if (myData.length === 0) {
-            console.error("Keine Daten für den ausgewählten Ort gefunden.");
-            return; // Beende die Funktion, wenn keine Daten vorhanden sind
+        // Überprüfe, ob UV-Daten vorhanden sind
+        if (!myData.uv_data || myData.uv_data.length === 0) {
+            console.error("Keine UV-Daten für den ausgewählten Ort gefunden.");
+            return;
         }
 
-        // Führe die Datenverarbeitung nur aus, wenn Daten vorhanden sind
-        const uvIndex = myData.map((item) => item.uv_index);
-        const erstellt = myData.map((item) => item.erstellt);
+        // Führe die UV-Datenverarbeitung aus
+        const uvIndex = myData.uv_data.map((item) => item.uv_index);
+        const erstellt = myData.uv_data.map((item) => item.erstellt);
         console.log("UV-Index:", uvIndex);
         
         chart.data.labels = erstellt;
         chart.data.datasets[0].data = uvIndex;
-        chart.data.datasets[0].label = myData[0].ort;
+        chart.data.datasets[0].label = myData.uv_data[0].ort; // Stelle sicher, dass dies korrekt ist
         
         chart.update();
+
+        // Zeige den durchschnittlichen UV-Index an
+        const averageUvIndex = myData.average_uv_index;
+        console.log(averageUvIndex);
+        let averageUvIndexDisplay = averageUvIndex !== null ? averageUvIndex.toFixed(2) : "Nicht verfügbar";
+        console.log(averageUvIndexDisplay);
+
+        // return averageUvIndexDisplay;
+
+        
+        document.getElementById('averageUvIndex').innerHTML = `Durchschnittlicher UV-Index: ${averageUvIndexDisplay}`;
+
+        // Hier kannst du die Schutzzeit berechnen, indem du die Werte von der Schutzzeit-PHP-Datei abfragst
+        // Führe den Fetch für die Schutzzeit durch
+        // fetch(`schutzzeit.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}&uvIndex=${myData.uv_data[0].ort}`)
+        //     .then(response => response.json())
+        //     .then(schutzData => {
+        //         // Hier verarbeite die Schutzzeit-Daten
+        //         console.log("Schutzzeit Daten:", schutzData);
+        //         // Füge Logik hinzu, um die Schutzzeit anzuzeigen
+        //     });
     })
     .catch((error) => {
         console.error("Fehler beim Abrufen der Daten: ", error);
     });
+
+    return averageUvIndexDisplay;
+
 
 }
 
@@ -153,6 +174,7 @@ let chart = new Chart(ctx, {
 });
 
 let selectedHauttyp = null; // Globale Variable zur Speicherung des Hauttyps
+let selectedUvSchutz = null; // Globale Variable zur Speicherung des UV-Schutzes
 
 function selectSkinType(button) {
     // Entfernt die 'selected'-Klasse von allen Hauttyp-Buttons
@@ -169,48 +191,71 @@ function selectSkinType(button) {
 }
 
 function selectUvSchutz(button) {
-    // Remove 'selected' class from all UV protection buttons
+    // Entfernt die 'selected'-Klasse von allen UV-Schutz-Buttons
     document.querySelectorAll('.uvSchutzbox').forEach(btn => btn.classList.remove('selected'));
     
-    // Add 'selected' class to the clicked UV protection button
+    // Fügt die 'selected'-Klasse zum geklickten Button hinzu
     button.classList.add('selected');
+
+    // Speichert den ausgewählten UV-Schutz (30 oder 50 oder 0 für gar nöd)
+    const uvSchutzText = button.nextElementSibling.textContent.trim(); // Holt den Text neben dem Button (z.B. Sonnenschutz 30)
+    
+    if (uvSchutzText.includes('30')) {
+        selectedUvSchutz = 30;
+    } else if (uvSchutzText.includes('50')) {
+        selectedUvSchutz = 50;
+    } else {
+        selectedUvSchutz = 0; // gar nöd
+    }
+
+    console.log("Ausgewählter UV-Schutz:", selectedUvSchutz); // Zu Debugging-Zwecken
 }
 
-document.getElementById('schutzForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Verhindert, dass das Formular die Seite neu lädt
-
-    // Holt den LSF-Wert aus dem Formular
-    const lsf = document.getElementById('lsf').value;
-
+// Schutzzeit-Berechnung und Ergebnisanzeige
+function berechneSchutzzeit(averageUvIndex) {
+    console.log("Berechne Schutzzeit...");
     // Prüft, ob ein Hauttyp ausgewählt wurde
     if (!selectedHauttyp) {
         alert("Bitte wähle einen Hauttyp aus.");
         return;
     }
 
-    // Sendet eine GET-Anfrage mit dem ausgewählten Hauttyp und LSF
-    fetch(`unload2.php?hauttyp=${selectedHauttyp}&lsf=${lsf}`)
-        .then(response => response.json())
-        .then(data => {
-            // Verarbeitung der Antwort
-            if (data.error) {
-                document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${data.error}</p>`;
+    // Prüft, ob ein UV-Schutz ausgewählt wurde
+    if (selectedUvSchutz === null) {
+        alert("Bitte wähle eine Sonnenschutzstufe aus.");
+        return;
+    }
+
+    console.log("averageUvIndex in berechneSchutzzeit:", averageUvIndex);
+
+    // Sendet eine GET-Anfrage mit dem ausgewählten Hauttyp und UV-Schutz
+    fetch(`https://im3.lisastrebel.ch/unload2.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log("Server Response:", data); // Fügt dies hinzu, um die Antwort zu überprüfen
+        if (data.error) {
+            document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${data.error}</p>`;
+        } else {
+            if (data.length > 0) {
+                let resultHtml = "<ul>";
+                data.forEach(item => {
+                    const totalMinutes = item.geschuetzt; // Angenommen, 'geschuetzt' ist die Zeit in Minuten
+                    const hours = Math.floor(totalMinutes / 60); // Ganze Stunden
+                    const minutes = totalMinutes % 60; // Verbleibende Minuten
+
+                    // Ausgabe im Format "X Stunden Y Minuten"
+                    resultHtml += `<li>Sonnenschutzzeit: ${hours} Stunden ${minutes} Minuten</li>`;
+                });
+                resultHtml += "</ul>";
+                document.getElementById('result').innerHTML = resultHtml;
             } else {
-                if (data.length > 0) {
-                    let resultHtml = "<ul>";
-                    data.forEach(item => {
-                        resultHtml += `<li>Sonnenschutzzeit: ${item.geschuetzt} Minuten</li>`;
-                    });
-                    resultHtml += "</ul>";
-                    document.getElementById('result').innerHTML = resultHtml;
-                } else {
-                    document.getElementById('result').innerHTML = "<p>Keine Ergebnisse gefunden.</p>";
-                }
+                document.getElementById('result').innerHTML = "<p>Keine Ergebnisse gefunden.</p>";
             }
-        })
-        .catch(error => {
-            document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${error.message}</p>`;
-        });
-});
+        }
+    })
 
-
+    .catch(error => {
+        console.log("Fetch Error:", error); // Fehler in der Anfrage anzeigen
+        document.getElementById('result').innerHTML = `<p style="color: red;">Fehler: ${error.message}</p>`;
+    });
+}

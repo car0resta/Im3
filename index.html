@@ -20,15 +20,15 @@
         <div class="main-text">
             <h1>Hesch bim Wandere z’viel Sunne verwütscht?</h1>
         </div>
-        </div>
     </div>
-    <div class="wannwielang">
+<div class="wannwielang">
         <div class="wann">
         <h2>Wenn bisch i de Sunne gsii?</h2>
-        <input type="date" id="date-picker">
-    </div>
+        <input type="date" id="date-picker" class="datepicker">
+        </div>
+   
     <div class="wielang">
-        <h2>Wie lang bisch i de Sunne gsii?</h2>
+        <h2>Wie viel Stund bisch i de Sunne gsii?</h2>
         <form class="anzahlStunden">
             <select id="numberSelect" name="numberSelect" required>
                 <option value="" disabled selected></option>
@@ -59,7 +59,6 @@
                 <option value="24">24</option>
             </select>
         </form>
-        
     </div>
 </div>
 <div class="wo">
@@ -99,61 +98,54 @@
 <h2>Mit was hesch dich ihgrämt?</h2>
 <div class="uvSchutzbox-container">
     <div class="garnoed">
-        <button class='uvSchutzbox' onclick="selectUvSchutz(this)"></button>
+        <button class='uvSchutzbox' data-lsf="0" onclick="selectUvSchutz(this)"></button>
         <h3 class="text-next-to-box">gar nöd</h3>
     </div>
     <div class="schutz30">
-        <button class='uvSchutzbox' onclick="selectUvSchutz(this)"></button>
+        <button class='uvSchutzbox' data-lsf="30" onclick="selectUvSchutz(this)"></button>
         <h3 class="text-next-to-box">Sonnenschutz 30</h3>
     </div>
     <div class="schutz50">
-        <button class='uvSchutzbox' onclick="selectUvSchutz(this)"></button>
+        <button class='uvSchutzbox' data-lsf="50" onclick="selectUvSchutz(this)"></button>
         <h3 class="text-next-to-box">Sonnenschutz 50</h3>
     </div>
-    </div>
 </div>
+
 
 </div>
 </div>
 
 <div class="kurvenGrafik">
-<form id="myort">
-    <label for="ort"></label>
     <div class="anzeigen">
-        <button class="submit">Anzeigen
-        </button>
+        <form id="myort">
+            <label for="ort"></label>
+            <!-- Button zum Anzeigen, der auch die Schutzzeit berechnet -->
+            <button class="submit" id="anzeigenButton">Anzeigen</button>
+        </form>
     </div>
- <div class="ergebnisContainer">
-    <div class="ergebnisse">
-        <h2>Diis Resultat</h2>
-        <div class="ergebnisBoxen">
-            <div class = "ergebnisBox1">
-                <p>So lang hättisch dörfe i de Sunne chille:</p>
+    <div class="ergebnisContainer">
+        <div class="ergebnisse">
+            <h2>Diis Resultat</h2>
+            <div class="ergebnisBoxen">
+                <div class="ergebnisBox1">
+                    <p>So lang hättisch dörfe i de Sunne chille:</p>
+                    <div id="result">
+                        <!-- Hier wird das Ergebnis der Berechnung angezeigt -->
+                    </div>
+                </div>
+                <div class="ergebnisBox2">
+                    <p>So lang hesch würklich i de Sunne chillt:</p> 
+                    <div id="selectedHours"></div>
+                </div>
             </div>
-            <div class = "ergebnisBox2">
-                <p>So lang hesch würklich i de Sunne chillt:</p> 
+        </div>
+        <div class="grafik">
+            <h2>UV-Index</h2>
+            <div>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>
-    <div class="grafik">
-        <h2>UV-Index</h2>
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
-</div>
-</form>
-<h1>Sonnenschutz Zeitrechner</h1>
-<form id="schutzForm">
-
-    <label for="lsf">Lichtschutzfaktor (LSF):</label>
-    <input type="number" id="lsf" name="lsf" min="0" value="0">
-
-    <button type="submit">Berechnen</button>
-</form>
-
-<div id="result">
-    <!-- Hier wird das Ergebnis angezeigt -->
 </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="home.js"></script>

@@ -12,6 +12,12 @@ if (isset($_GET['lsf'])) {
     $lsf = 0; // Standardwert, wenn kein LSF ausgewählt wurde
 }
 
+if (isset($_GET['uvindex'])) {
+    $uvindex = $_GET['uvindex']; // LSF kommt aus dem Formular (über GET)
+} else {
+    $uvindex = 1; // Standardwert, wenn kein LSF ausgewählt wurde
+}
+
 require_once 'config.php';
 
 header('Content-Type: application/json');
@@ -20,12 +26,13 @@ try {
     $pdo = new PDO($dsn, $username, $password, $options);
 
     // Verwende den dynamischen Ort in der SQL-Abfrage
-    $sql = "SELECT * FROM `sonnenschutz` WHERE hauttyp = :hauttyp AND lsf = :lsf";
+    $sql = "SELECT * FROM `sonnenschutz` WHERE hauttyp = :hauttyp AND lsf = :lsf AND uvindex = :uvindex";
 
     $stmt = $pdo->prepare($sql);
     
     $stmt->bindParam(':hauttyp', $hauttyp);
     $stmt->bindParam(':lsf', $lsf);
+    $stmt->bindParam(':uvindex', $uvindex);
     
     $stmt->execute();
     

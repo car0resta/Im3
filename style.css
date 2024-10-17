@@ -94,7 +94,21 @@ h2 { /*Fragentitel*/
     align-items: center;
 }
 
-input[type="date"] {
+
+.datepicker-selected{
+    background-color: var(--yellow);
+    color: var(--darkblue);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    font-family: var(--inter);
+}
+
+.datepicker {
     padding: 10px;
     font-size: 16px;
     border-radius: 4px;
@@ -105,12 +119,11 @@ input[type="date"] {
     color: var(--yellow);
     font-size: 18px;
     font-family: var(--inter);
-  }
+}
+.datepicker::-webkit-calendar-picker-indicator {
+    filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(6deg) brightness(100%);
+}
 
-  input[type="date"] :hover {
-    background-color: var(--yellow);
-    color: var(--darkblue);
-  }
 
   #numberSelect {
     padding: 10px;
@@ -208,8 +221,8 @@ input[type="date"] {
 }
 
 /* Rahmen für den ausgewählten Button */
-.box1:focus {
-    border: 3px solid var(--darkblue); /* Schwarzer Rahmen */
+.box1.selected {
+    border: 5px solid var(--yellow); /* Schwarzer Rahmen */
 }
 
 .text-next-to-box {
@@ -256,6 +269,8 @@ input[type="date"] {
 }
 
 .uvSchutzbox {
+    position: relative; /* Sicherstellen, dass z-index funktioniert */
+    z-index: 10;
     width: 42px; /* Adjusted size for better visibility */
     height: 42px; /* Adjusted size for better visibility */
     background-color: var(--darkblue); /* Blue color */
@@ -263,15 +278,10 @@ input[type="date"] {
     justify-content: center;
     align-items: center;
     margin: 5px;
-    border: 1px solid;
+    border: none;
     cursor: pointer; /* Cursor als Pointer */
     transition: background-color 0.3s ease;
     margin-bottom: 10px;
-}
-
-
-.uvSchutzbox:hover {
-    opacity: 0.5;
 }
 
 .uvSchutzbox.selected{
@@ -287,6 +297,7 @@ input[type="date"] {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .ergebnisContainer {
@@ -351,10 +362,16 @@ p {
     margin: 10px;
     width: 200px;
     height: 40px;
+    border: none;
     background-color: var(--darkblue);
     color: var(--yellow);
     font-size: 18px;
     font-family: var(--inter);
+}
+
+.submit:hover {
+    background-color: var(--yellow);
+    color: var(--darkblue);
 }
 
 .anzeigen {
@@ -362,4 +379,11 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+#selectedHours, #result {
+    font-size: 18px;
+    font-family: var(--spicyrice);
+    color: var(--yellow);
 }
