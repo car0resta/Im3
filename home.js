@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('date-picker').classList.add('datepicker');
     document.getElementById('date-picker').addEventListener('change', function() {
@@ -84,7 +84,7 @@ document.getElementById('myort').addEventListener('submit', async function(event
     
     
     // Baue die URL mit dem ausgewählten Ort zusammen
-    const url = "https://im3.lisastrebel.ch/unload.php?ort="+encodeURIComponent(selectedLocation)+"&erstellt="+encodeURIComponent(selectedDate);
+    const url = "unload.php?ort="+encodeURIComponent(selectedLocation)+"&erstellt="+encodeURIComponent(selectedDate);
     console.log(url);
     
     // Rufe die Daten ab und aktualisiere den Chart
@@ -241,7 +241,7 @@ function berechneSchutzzeit(averageUvIndex) {
     console.log("averageUvIndex in berechneSchutzzeit:", averageUvIndex);
 
     // Sendet eine GET-Anfrage mit dem ausgewählten Hauttyp und UV-Schutz
-    fetch(`https://im3.lisastrebel.ch/unload2.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}&uvindex=${averageUvIndex}`)
+    fetch(`unload2.php?hauttyp=${selectedHauttyp}&lsf=${selectedUvSchutz}&uvindex=${averageUvIndex}`)
     .then(response => response.json())
     .then(data => {
         console.log("Server Response:", data); // Fügt dies hinzu, um die Antwort zu überprüfen

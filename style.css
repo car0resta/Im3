@@ -13,16 +13,31 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth; /* Aktiviert sanftes Scrollen */
+}
+
 body {
     background-color: var(--lightblue);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     margin: 0;
+    background-image: url('/images/cloud.png');
+    background-position: 90% 20%; /* Positionen der Wolken */
+    background-repeat: no-repeat; /* Kein Wiederholen der Bilder */
+    background-size: 400px; /* Größe der Wolken */
+    min-height: 100vh;
 }
 
-.container {
+.content {
+    min-height: calc(100vh - 100px); /* 100vh minus der Höhe des Footers */
+    flex: 1;
+}
+
+.header {
     position: relative;
     width: 100%;
     max-width: 1200px;
@@ -50,14 +65,6 @@ h2 { /*Fragentitel*/
     color: var(--darkblue);
 }
 
-.cloud {
-        position: absolute;
-        background-size: contain; /* Passt das Bild in den Bereich an */
-        background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
-        margin-left: 70px;
-        margin-top: 10px;
-}
-
 .backgroundcloud1 {
     background-image: url('cloud1.png');
     background-repeat: repeat;
@@ -78,10 +85,8 @@ h2 { /*Fragentitel*/
 }
 
 .wannwielang {
-    position: absolute;
-    align-content: center;
     display: flex;
-    top: 100%;
+    margin-top: 150px;
 }
 
 .wann {
@@ -162,12 +167,15 @@ h2 { /*Fragentitel*/
   }
 
   .wo {
-    position: absolute;
     align-items: center;
+    width: 100%;
     display: flex;
-    top: 130%;
-    margin: 20px;
+    margin: 50px;
     flex-direction: column;
+    background-image: url('/images/cloud.png');
+    background-position: 25% 30%; /* Positionen der Wolken */
+    background-repeat: no-repeat; /* Kein Wiederholen der Bilder */
+    background-size: 200px; /* Größe der Wolken */
 }
 
 .grid-container {
@@ -202,8 +210,7 @@ h2 { /*Fragentitel*/
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 160%;
+    margin-top: 50px;
 }
 
 
@@ -216,8 +223,6 @@ h2 { /*Fragentitel*/
 }
 
 .box1 {
-    flex-direction: column;
-    justify-content: center;
     width: 163px;
     height: 163px;    
     margin: 5px;
@@ -225,10 +230,9 @@ h2 { /*Fragentitel*/
     cursor: pointer;
     font-size: 16px;
     border-radius: 4px;
-    color: #000;
     text-align: center;
     transition: border 0.3s ease;
-
+    color: var(--darkblue);
 }
 
 .box1:hover {
@@ -266,8 +270,7 @@ h2 { /*Fragentitel*/
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    position: absolute;
-    top: 220%;
+    margin-top: 50px;
     flex-direction: column;
 }
 
@@ -275,7 +278,6 @@ h2 { /*Fragentitel*/
     display:flex;
     justify-content: space-between;
     width: 100%;
-    max-width:600px;
     margin: 10px;
     position: relative;
     top: 180%;
@@ -312,14 +314,17 @@ h2 { /*Fragentitel*/
 
 
 .kurvenGrafik {
-    position: absolute;
-    top: 210%;
     width: 100%;
     height: 100%;
     display: flex;
+    margin-bottom: 200px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('/images/cloud.png');
+    background-position: 90% 0%; /* Positionen der Wolken */
+    background-repeat: no-repeat; /* Kein Wiederholen der Bilder */
+    background-size: 300px; /* Größe der Wolken */
 }
 
 .ergebnisContainer {
@@ -402,7 +407,7 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 150px;
+    margin: 10px 10px 100px 10px;
 }
 
 #selectedHours, #result {
@@ -428,4 +433,178 @@ p {
 .pfeilbild {
     width: 50px;
     margin-top: 100px;
+}
+
+footer {
+    z-index: 10;
+    background-color: green;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 50px; /* Stellt sicher, dass der Footer die richtige Höhe hat */
+    position: relative; /* oder 'static' wenn keine feste Positionierung gewünscht */
+    bottom: 0;
+}
+
+@media (max-width: 480px)
+{
+    body {
+        background-image: url('/images/cloud.png');
+        background-position: 90% 15%; /* Positionen der Wolken */
+        background-repeat: no-repeat; /* Kein Wiederholen der Bilder */
+        background-size: 200px; /* Größe der Wolken */
+    }
+
+    .header {
+        width: 100%;
+    }
+
+    .logo1 {
+        width: 100px;
+        height: 100px;
+    }
+
+    .main-text h1 {
+        font-size: 40px;
+    }
+
+    .wannwielang {
+        display: flex;
+        flex-direction: column;
+        margin-top: 200px;
+    }
+
+    .wann {
+        width: 100%;
+        padding: 5%;
+        text-align: center;
+    }
+
+    .wielang {
+        width: 100%;
+        padding: 5%;
+        text-align: center;
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .date {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        margin: 10px;
+        width: 200px;
+        height: 40px;
+        background-color: var(--darkblue);
+        color: var(--yellow);
+        font-size: 18px;
+        font-family: var(--inter);
+        border: none;
+    }
+
+    .numberSelect {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        border:none;
+        width: 200px;
+        margin: 10px;
+        height: 40px;
+        background-color: var(--darkblue);
+        color: var(--yellow);
+        font-size: 18px;
+        font-family: var(--inter);
+    }
+
+    .numberSelect-selected {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        border:none;
+        width: 200px;
+        margin: 10px;
+        height: 40px;
+        background-color: var(--yellow);
+        color: var(--darkblue);
+        font-size: 18px;
+        font-family: var(--inter);
+    }
+
+    .wo {
+        align-items: center;
+        width: 100%;
+        display: flex;
+        margin: 50px;
+        flex-direction: column;
+        background-image: url('/images/cloud.png');
+        background-position: 5% 15%; /* Positionen der Wolken */
+        background-size: 120px; /* Größe der Wolken */
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: 4px;
+        margin: 10px;
+        font-size: 18px;
+        font-family: var(--inter);
+    }
+
+    .pfeilbild {
+        width: 30px;
+        margin-top: 100px;
+    }
+
+    .pfeil {
+        margin-top: 70%;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .uvSchutz {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: 50px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .uvSchutzbox-container{
+        flex-direction: column;
+    }
+
+    .garnoed, .schutz30, .schutz50 {
+        display: flex;
+        margin: 10px;
+        justify-content: left;
+        margin-left: 50px;
+    }
+
+    .kurvenGrafik {
+        background-position: 60% 10%; /* Positionen der Wolken */
+
+        background-size: 200px; /* Größe der Wolken */
+    }
+
+    .ergebnisContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+    .ergebnisBoxen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 10px;
+    }
 }

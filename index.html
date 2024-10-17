@@ -10,21 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <div class="logo-placeholder">
             <img src="images/logo.png" alt="Logo" class="logo1">
-        </div>
-        <div class="cloud">
-            <img src="images/cloud.png"alt="Wolke"width="220">
         </div>
         <div class="main-text">
             <h1>Hesch bim Wandere z’viel Sunne verwütscht?</h1>
         </div>
         <div class="pfeil">
+            <a href="#wannwielang">
             <img src="images/pfeil.png" alt="Pfeil" width="100" class="pfeilbild">
+        </a>
         </div>
     </div>
-<div class="wannwielang">
+
+<div class="wannwielang container" id="wannwielang">
         <div class="wann">
         <h2>Wenn bisch i de Sunne gsii?</h2>
         <input type="date" id="date-picker" class="datepicker">
@@ -64,7 +64,7 @@
         </form>
     </div>
 </div>
-<div class="wo">
+<div class="wo container">
     <h2>Wo bisch gsii?</h2>
     <div class="grid-container">
         <div class="grid-item" onclick="selectField(this)">Berner Oberland</div>
@@ -73,7 +73,7 @@
         <div class="grid-item" onclick="selectField(this)">Wallis</div>
     </div>
 </div>
-<div class="typ-kaestchen">
+<div class="typ-kaestchen container">
     <h2>Was isch din Huuttyp?</h2>
     <div class="box-container">
             <button class="box1" style="background-color: rgba(253, 233, 222, 1);" onclick="selectSkinType(this)">
@@ -88,16 +88,16 @@
             <button class="box1" style="background-color: rgba(174, 113, 91, 1);" onclick="selectSkinType(this)">
                 <span> Hauttyp 4</span>
             </button>
-            <button class="box1" style="background-color: rgba(107, 58, 43, 1);" onclick="selectSkinType(this)">
+            <button class="box1" style="background-color: rgba(107, 58, 43, 1); color: #B2D7FF;" onclick="selectSkinType(this)">
                 <span> Hauttyp 5</span>
             </button>
-            <button class="box1" style="background-color: rgba(62, 36, 19, 1);" onclick="selectSkinType(this)">
+            <button class="box1" style="background-color: rgba(62, 36, 19, 1); color: #B2D7FF;" onclick="selectSkinType(this)">
                 <span> Hauttyp 6</span>
             </button>
     </div>
 </div>
 
-<div class="uvSchutz">
+<div class="uvSchutz container">
 <h2>Mit was hesch dich ihgrämt?</h2>
 <div class="uvSchutzbox-container">
     <div class="garnoed">
@@ -118,7 +118,7 @@
 </div>
 </div>
 
-<div class="kurvenGrafik">
+<div class="kurvenGrafik container">
     <div class="anzeigen">
         <form id="myort">
             <label for="ort"></label>
@@ -156,8 +156,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="home.js"></script>
 </div>
-<div class="backgroundcloud1">
 </div>
+<footer class="footer">
+</footer>
 </body>
 </html>
 
