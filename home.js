@@ -1,4 +1,4 @@
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded',function(){
 
     document.getElementById('date-picker').classList.add('datepicker');
     document.getElementById('date-picker').addEventListener('change', function() {
