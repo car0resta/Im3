@@ -106,6 +106,7 @@ h2 { /*Fragentitel*/
     height: 40px;
     font-size: 18px;
     font-family: var(--inter);
+    border: none;
 }
 
 .datepicker {
@@ -119,22 +120,38 @@ h2 { /*Fragentitel*/
     color: var(--yellow);
     font-size: 18px;
     font-family: var(--inter);
+    border: none;
 }
+
 .datepicker::-webkit-calendar-picker-indicator {
     filter: invert(100%) sepia(100%) saturate(1000%) hue-rotate(6deg) brightness(100%);
 }
 
 
-  #numberSelect {
+ .numberSelect {
     padding: 10px;
     font-size: 16px;
     border-radius: 4px;
-    border-color: var(--darkblue);
+    border:none;
     width: 200px;
     margin: 10px;
     height: 40px;
     background-color: var(--darkblue);
     color: var(--yellow);
+    font-size: 18px;
+    font-family: var(--inter);
+  }
+
+  .numberSelect-selected {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border:none;
+    width: 200px;
+    margin: 10px;
+    height: 40px;
+    background-color: var(--yellow);
+    color: var(--darkblue);
     font-size: 18px;
     font-family: var(--inter);
   }
@@ -383,9 +400,14 @@ p {
 }
 
 #selectedHours, #result {
-    font-size: 18px;
+    font-size: 25px;
     font-family: var(--spicyrice);
     color: var(--yellow);
-}
 
-.ermutigung
+
+#resultattext {
+    margin: 20px;
+    text-align: center;
+    font-size: 25px;
+    font-family: var(--spicyrice);
+}

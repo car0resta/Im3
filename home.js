@@ -1,18 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    document.getElementById('date-picker').classList.add('datepicker');
     document.getElementById('date-picker').addEventListener('change', function() {
-        this.classList.add('datepicker');
+        
         if (this.value) {
             this.classList.add('datepicker-selected');
             this.classList.remove('datepicker');
         } else {
-            this.classList.remove('datepicker-selected');
             this.classList.add('datepicker');
+            this.classList.remove('datepicker-selected');
         }
     });
 
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    document.getElementById('numberSelect').classList.add('numberSelect');
+    document.getElementById('numberSelect').addEventListener('change', function() {
+        
+        if (this.value) {
+            this.classList.add('numberSelect-selected');
+            this.classList.remove('numberSelect');
+        } else {
+            this.classList.add('numberSelect');
+            this.classList.remove('numberSelect-selected');
+        }
+    });
+
+});
 
 
 // Datum auswählen
@@ -238,19 +255,32 @@ function berechneSchutzzeit(averageUvIndex) {
         } else {
             if (data.length > 0) {
                 let resultHtml = "<ul>";
+                console.log(data);
                 data.forEach(item => {
                     const totalMinutes = item.geschuetzt; // Angenommen, 'geschuetzt' ist die Zeit in Minuten
                     const hours = Math.floor(totalMinutes / 60); // Ganze Stunden
                     const minutes = totalMinutes % 60; // Verbleibende Minuten
 
                     // Ausgabe im Format "X Stunden Y Minuten"
-                    resultHtml += `<li>Sonnenschutzzeit: ${hours} Stunden ${minutes} Minuten</li>`;
+                    resultHtml += `${hours} Stunden ${minutes} Minuten`;
                 });
                 resultHtml += "</ul>";
                 document.getElementById('result').innerHTML = resultHtml;
             } else {
                 document.getElementById('result').innerHTML = "<p>Keine Ergebnisse gefunden.</p>";
             }
+
+            console.log("dürfen:", data[0].geschuetzt);
+
+            let wirklich = document.getElementById('numberSelect').value * 60;
+
+            console.log("wirklich:", wirklich); 
+            if (data[0].geschuetzt > wirklich) {
+                document.getElementById('resultattext').innerText = `GUT GESCHÜTZT!`;
+            } else {    
+                document.getElementById('resultattext').innerText = `Nicht gut geschützt!`;
+            }
+
         }
     })
 
